@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Message</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff5f5;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+        }
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .title {
+            color: #ec4899;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .yes-btn {
+            padding: 0.8rem 2rem;
+            font-size: 1.2rem;
+            background: #ec4899;
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .no-btn {
+            padding: 0.8rem 2rem;
+            font-size: 1.2rem;
+            background: white;
+            color: #ec4899;
+            border: 2px solid #ec4899;
+            border-radius: 9999px;
+            cursor: pointer;
+        }
+        .message {
+            display: none;
+            animation: fadeIn 1s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .heart {
+            color: #ec4899;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card" id="question">
+            <h1 class="title">Will you be my forever valentine Mia? 💖</h1>
+            <div class="buttons">
+                <button class="yes-btn" onclick="showMessage()">Yes! ❤️</button>
+                <button class="no-btn" id="noBtn" onmouseover="moveButton()" onclick="handleNo()">No 💔</button>
+            </div>
+            <p id="noMessage" style="color: #ec4899; font-size: 1.2rem;"></p>
+        </div>
+        
+        <div class="card message" id="message">
+            <h2 class="title">My Dearest Labby 💝</h2>
+            <p><em>"In your smile, I see something more beautiful than the stars."</em></p>
+            <p>Your love has made me smile and feel at ease, and I can't imagine walking this journey without you by my side.</p>
+            <p>You're not just my valentine, you're my best friend, my soulmate, and my everything. Thank you for making every day feel special just by being you.</p>
+            <p>I promise to love you more with each passing day, to cherish every moment we share, and to always be there for you.</p>
+            <p>Happy Valentine's Day, labby! Here's to many more beautiful moments together.</p>
+            <p style="text-align: right; font-weight: bold; color: #ec4899;">
+                Forever yours,<br>
+                Josh ❤️
+            </p>
+            <button class="yes-btn" onclick="location.reload()">Start Over 💝</button>
+            <button class="yes-btn" style="margin-left: 10px;" onclick="downloadHTML()">Download Page 💌</button>
+        </div>
+    </div>
+
+    <script>
+        function downloadHTML() {
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'valentine.html';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+    </script>
+
+    <script>
+        const noMessages = [
+            "Are you sure? 🥺",
+            "Kitty will be sad.",
+            "Timmy will be sad.",
+            "HMP!",
+            "bro what?",
+            "please be my valentine" ,
+            "Mia pleasee",
+            "Just say yes hmp",
+        ];
+        let noCount = 0;
+
+        function showMessage() {
+            document.getElementById('question').style.display = 'none';
+            document.getElementById('message').style.display = 'block';
+        }
+
+        function handleNo() {
+            noCount++;
+            document.getElementById('noMessage').textContent = 
+                noMessages[Math.min(noCount - 1, noMessages.length - 1)];
+        }
+
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            btn.style.transform = `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`;
+        }
+    </script>
+</body>
+</html>
